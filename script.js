@@ -12,35 +12,34 @@ document.addEventListener("DOMContentLoaded", () => {
     let isValid = true;
     const messages = [];
 
-    // Username validation
+    // Username validation: must be at least 3 characters
     if (username.length < 3) {
       isValid = false;
       messages.push("Username must be at least 3 characters long.");
     }
 
-    // Email validation
-    if (!email.includes("@") || !email.includes(".")) {
+    // Email validation: must match a proper email pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
       isValid = false;
       messages.push("Please enter a valid email address.");
     }
 
-    // Password validation
+    // Password validation: at least 8 characters
     if (password.length < 8) {
       isValid = false;
       messages.push("Password must be at least 8 characters long.");
     }
 
-    // Show feedback
+    // Make feedbackDiv visible
     feedbackDiv.style.display = "block";
 
     if (isValid) {
       feedbackDiv.textContent = "Registration successful!";
-      feedbackDiv.style.color = "#28a745"; // Green
-      feedbackDiv.style.backgroundColor = "#d4edda";
+      feedbackDiv.style.color = "#28a745"; // Success green
     } else {
       feedbackDiv.innerHTML = messages.join("<br>");
-      feedbackDiv.style.color = "#d8000c"; // Red
-      feedbackDiv.style.backgroundColor = "#ffbaba";
+      feedbackDiv.style.color = "#dc3545"; // Error red
     }
   });
 });
